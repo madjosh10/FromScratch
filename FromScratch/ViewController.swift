@@ -28,8 +28,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         cubeNode.geometry = cube
         cubeNode.position = SCNVector3(0.0, 0.0, -3.0)
         
+        let rotation = SCNAction.rotateBy(x: 0, y: 2 * .pi, z: 0, duration: 2)
+        let repeatRotation = SCNAction.repeatForever(rotation)
+        cubeNode.runAction(repeatRotation)
         
         sceneView.scene.rootNode.addChildNode(cubeNode)
+        
         
         
     }
