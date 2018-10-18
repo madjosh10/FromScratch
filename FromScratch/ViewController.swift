@@ -15,13 +15,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var sceneView: ARSCNView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         sceneView.delegate = self
-        sceneView.debugOptions = [.showFeaturePoints]
+        sceneView.debugOptions = [.showFeaturePoints, .showWorldOrigin]
         
-        if let scene = SCNScene(named: "art.scnassets/ship.scn") {
-            sceneView.scene = scene
-        }
+        let cube = SCNBox(width: 0.3, height: 0.3, length: 0.3, chamferRadius: 0.0)
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor.blue
+        cube.materials = [material]
+        
+        let cubeNode = SCNNode()
+        cubeNode.geometry = cube
+        cubeNode.position = SCNVector3(0.0, 0.0, -3.0)
+        
+        
+        sceneView.scene.rootNode.addChildNode(cubeNode)
+        
         
     }
 
@@ -34,7 +42,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        sceneView.session.pause()
+    }
+    
     
 
-}
+} // end ViewController Class
 
