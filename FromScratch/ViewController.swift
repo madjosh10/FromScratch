@@ -17,6 +17,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         sceneView.delegate = self
         sceneView.debugOptions = [.showFeaturePoints, .showWorldOrigin]
+        sceneView.autoenablesDefaultLighting = true
         
         let cube = SCNBox(width: 0.3, height: 0.3, length: 0.3, chamferRadius: 0.0)
         let material = SCNMaterial()
